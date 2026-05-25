@@ -1,31 +1,56 @@
 # -*- coding: utf-8 -*-
 import random
 
-def replace_min_in_rows(matrix):
-    for i in range(len(matrix)):
-        if matrix[i]:  # если строка не пустая
-            min_val = min(matrix[i])  # находим минимальное значение в строке
-            for j in range(len(matrix[i])):
-                if matrix[i][j] == min_val:
-                    matrix[i][j] = 0.0  # заменяем на ноль
-    return matrix
+# Ввод размера матрицы
+n = int(input("Введите размер матрицы n: "))
 
+# Создаем две пустые матрицы
+A = []
+B = []
 
-def generate_random_matrix(n, m, min_val=-10.0, max_val=10.0):
-    return [[round(random.uniform(min_val, maxval), 2) for  in range(m)] for  in range(n)]
+# Заполняем первую матрицу A
+print("\nМатрица A:")
+for i in range(n):
+    row = []
+    for j in range(n):
+        row.append(random.randint(-10, 10))
+    A.append(row)
+    print(row)
 
+# Заполняем вторую матрицу B
+print("\nМатрица B:")
+for i in range(n):
+    row = []
+    for j in range(n):
+        row.append(random.randint(-10, 10))
+    B.append(row)
+    print(row)
 
-def print_matrix(matrix, name="Матрица"):
-    print(f"\n{name}:")
-    for row in matrix:
-        print(' '.join(f'{x:7.2f}' for x in row))
+# Создаем результирующую матрицу C
+C = []
 
+# Для каждой строки
+for i in range(n):
+    # Находим максимальное значение в i-й строке матрицы B
+    max_v = B[i][0]  # берем первый элемент как максимум
+    for j in range(n):
+        if B[i][j] > max_v:
+            max_v = B[i][j]
 
-if name == "main__":
-    n = int(input("Введите количество строк n: "))
-    m = int(input("Введите количество столбцов m: "))
-    matrix = generate_random_matrix(n, m, -10, 10)
+    print(f"\nМаксимум в строке {i + 1} матрицы B: {max_v}")
 
-    print_matrix(matrix, "Исходная матрица")
-    result = replace_min_in_rows(matrix)
-    print_matrix(result, "Матрица после замены (минимальные элементы строк обнулены)")
+    # Создаем новую строку для матрицы C
+    new_row = []
+    for j in range(n):
+        # Умножаем каждый элемент строки A на max_v
+        new_row.append(A[i][j] * max_v)
+    C.append(new_row)
+
+    print(f"Строка {i + 1} матрицы A: {A[i]}")
+    print(f"Результат умножения на {max_v}: {new_row}")
+
+# Выводим результат
+print("\n" + "=" * 50)
+print("Результирующая матрица C:")
+for row in C:
+    print(row)
