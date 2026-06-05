@@ -1,56 +1,43 @@
 # -*- coding: utf-8 -*-
-import random
+"""
+Задание 21.
+Даны две действительные квадратные матрицы размером n*n.
+Получить новую матрицу умножением элементов каждой строки первой матрицы
+на наибольшее из значений элементов соответствующей строки второй матрицы.
+"""
 
-# Ввод размера матрицы
 n = int(input("Введите размер матрицы n: "))
 
-# Создаем две пустые матрицы
+print("\nВведите матрицу A построчно:")
 A = []
-B = []
-
-# Заполняем первую матрицу A
-print("\nМатрица A:")
 for i in range(n):
-    row = []
-    for j in range(n):
-        row.append(random.randint(-10, 10))
+    row = list(map(float, input().split()))
+    if len(row) != n:
+        raise ValueError(f"В строке {i + 1} матрицы A должно быть {n} элементов")
     A.append(row)
-    print(row)
 
-# Заполняем вторую матрицу B
-print("\nМатрица B:")
+print("\nВведите матрицу B построчно:")
+B = []
 for i in range(n):
-    row = []
-    for j in range(n):
-        row.append(random.randint(-10, 10))
+    row = list(map(float, input().split()))
+    if len(row) != n:
+        raise ValueError(f"В строке {i + 1} матрицы B должно быть {n} элементов")
     B.append(row)
-    print(row)
 
-# Создаем результирующую матрицу C
 C = []
-
-# Для каждой строки
 for i in range(n):
-    # Находим максимальное значение в i-й строке матрицы B
-    max_v = B[i][0]  # берем первый элемент как максимум
-    for j in range(n):
-        if B[i][j] > max_v:
-            max_v = B[i][j]
-
-    print(f"\nМаксимум в строке {i + 1} матрицы B: {max_v}")
-
-    # Создаем новую строку для матрицы C
-    new_row = []
-    for j in range(n):
-        # Умножаем каждый элемент строки A на max_v
-        new_row.append(A[i][j] * max_v)
+    max_in_row_b = max(B[i])
+    new_row = [A[i][j] * max_in_row_b for j in range(n)]
     C.append(new_row)
 
-    print(f"Строка {i + 1} матрицы A: {A[i]}")
-    print(f"Результат умножения на {max_v}: {new_row}")
+print("\nМатрица A:")
+for row in A:
+    print(row)
 
-# Выводим результат
-print("\n" + "=" * 50)
-print("Результирующая матрица C:")
+print("\nМатрица B:")
+for row in B:
+    print(row)
+
+print("\nРезультирующая матрица C:")
 for row in C:
     print(row)

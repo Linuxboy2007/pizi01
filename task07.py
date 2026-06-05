@@ -1,41 +1,38 @@
-import random
+# -*- coding: utf-8 -*-
+"""
+Задание 7.
+Дана целочисленная квадратная матрица размером n*n.
+Сформировать два одномерных массива:
+- в первый переслать по строкам верхний треугольник, включая главную диагональ;
+- во второй — нижний треугольник, включая главную диагональ.
+"""
 
-def form_triangles(matrix):
-    n = len(matrix)  # размер квадратной матрицы
-    upper = []
-    lower = []
+n = int(input("Введите размер квадратной матрицы n: "))
 
-    for i in range(n):
-        for j in range(n):
-            if j >= i:   # верхний треугольник (диагональ и выше)
-                upper.append(matrix[i][j])
-            if j <= i:   # нижний треугольник (диiагональ и ниже)
-                lower.append(matrix[i][j])
+print("Введите матрицу построчно (элементы через пробел):")
+matrix = []
+for i in range(n):
+    row = list(map(int, input().split()))
+    if len(row) != n:
+        raise ValueError(f"В строке {i + 1} должно быть {n} элементов")
+    matrix.append(row)
 
-    return upper, lower
+upper = []
+lower = []
 
+for i in range(n):
+    for j in range(n):
+        if j >= i:
+            upper.append(matrix[i][j])
+        if j <= i:
+            lower.append(matrix[i][j])
 
-def generate_random_square_matrix(n, min_val=-10, max_val=10):
-    return [[random.randint(min_val, maxval) for  in range(n)] for  in range(n)] #FFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+print("\nИсходная матрица:")
+for row in matrix:
+    print(" ".join(f"{x:4}" for x in row))
 
+print("\nВерхний треугольник (включая главную диагональ):")
+print(upper)
 
-def print_matrix(matrix):
-    print("Квадратная матрица:")
-    for row in matrix:
-        print(' '.join(f'{x:4}' for x in row))
-    print()
-
-def print_array(arr, name):
-    print(f"{name}: {arr}")
-    print(f"Количество элементов: {len(arr)}")
-    print()
-
-
-if name == "main__":
-    n = int(input("Введите размер квадратной матрицы n: ")) 
-    matrix = generate_random_square_matrix(n, -9, 9)
-    print_matrix(matrix)
-    upper, lower = form_triangles(matrix)
-    print("Результат:")
-    print_array(upper, "Верхний треугольник (включая главную диагональ)")
-    print_array(lower, "Нижний треугольник (включая главную диагональ)")# -*- coding: utf-8 -*-
+print("\nНижний треугольник (включая главную диагональ):")
+print(lower)
