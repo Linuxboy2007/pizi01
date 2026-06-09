@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr 27 08:43:15 2026
+Семизов С.А. ПИЗИ23о1
+Задана целочисленная матрица размером n*m. Написать программу,
+позволяющую находить строки с наименьшей и наибольшей суммой и выводить
+их на печать
+
+"""
 import random
 
 n = int(input("Введите n: "))
@@ -19,6 +24,3 @@ for row in matrix:
 print(matrix)
 print(maxx)
 print(minn)
-@author: Urusor
-"""
-
